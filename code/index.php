@@ -31,4 +31,15 @@ echo $daysPerLanguages."<br>";
 // 12 task
 echo "<br>#12<br>";
 echo "8 в степени 2 = ";
-echo 8**2;
+echo (8**2)."<br>";
+
+// 13 task
+echo "<br>#13<br>";
+$myNum = 73;
+$answer = $myNum;
+$answer += 2;
+$answer *= 2;
+$answer -= 2;
+$answer /= 2;
+$answer -= $myNum;
+echo $answer."<br>";
