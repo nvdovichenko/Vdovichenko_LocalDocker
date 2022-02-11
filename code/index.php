@@ -43,3 +43,77 @@ $answer -= 2;
 $answer /= 2;
 $answer -= $myNum;
 echo $answer."<br>";
+
+// 14 task
+// Работа с %
+echo "<br>#14<br>";
+$a = 10;
+$b = 3;
+echo "Остаток от деления a=10 на b=3 равен ";
+echo ($a%$b)."<br>";
+
+echo "a делится без остатка на b? - ";
+if ($a%$b==0)
+    echo "делится, результат равен".($a/$b)."<br>";
+else
+    echo "делится с остатком, остаток равен ".($a%$b)."<br>";
+
+// Работа со степенью и корнем
+$st = pow(2, 10);
+echo $st."<br>";
+echo sqrt(245)."<br>";
+
+$list = [4, 2, 5, 19, 13, 0, 10];
+$sum = 0;
+foreach ($list as $n)
+    $sum = $sum + pow($n, 2);
+echo sqrt($sum)."<br>";
+
+// Работа с функциями округления
+echo "Квадратный корень из 379 примерно равен ".round(sqrt(379), 0)." или ".round(sqrt(379), 1)." или ".round(sqrt(379), 2)."<br>";
+$list2 = array ('ceil' => ceil(sqrt(587)), 'floor' => floor(sqrt(587)));
+echo "округление в большую сторону ".$list2['ceil']." и округление в меньшую сторону ".$list2['floor']."<br>";
+
+// Работа с min и max
+echo "минимальное ".min(4, -2, 5, 19, -130, 0, 10)."<br>";
+echo "максимальное ".max(4, -2, 5, 19, -130, 0, 10)."<br>";
+
+//Работа с рандомом
+echo rand(1, 100)."<br>";
+$arr3 = [10];
+for ($i = 0; $i < 10; $i++)
+{
+    $arr[$i] = rand(1,100);
+    echo $arr[$i]." ";
+}
+
+// Работа с модулем
+echo "<br>".abs(($b-$a))."<br>";
+$list3 = [1, 2, -1, -2, 3, -3];
+foreach ($list3 as $n) {
+    $n = abs($n);
+    echo $n." ";
+}
+
+// Общее
+$a2 = 2022;
+$divisors = [];
+for ($i = 1; $i <= $a2; $i++)
+    if ($a2 % $i == 0)
+        $divisors[] = $i;
+echo '<pre>';
+print_r($divisors);
+echo '</pre>';
+
+$list4 = [1,2,3,4,5,6,7,8,9,10];
+$sum = 0;
+foreach ($list4 as $n) {
+    $sum += $n;
+
+    if ($sum > 10)
+    {
+        echo "Первые ".$n." элементов<br>";
+        break;
+    }
+}
+
