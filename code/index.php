@@ -251,7 +251,7 @@ echo "<br>" . $arr11[count($arr11) - 1] . " " . $arr11[count($arr11) - 2] . "<br
 
 
 // task 18
-echo "<br>#18<br>";
+echo "<br>#18";
 $a = rand(1, 10);
 $b = rand(1, 10);
 
@@ -292,7 +292,7 @@ function getSumOfDigits($num): int
     return $sum;
 }
 
-echo ($age < 10 or $age > 99) ? "<br>Число $age <10 или >99?"
+echo ($age < 10 or $age > 99) ? "<br>Число $age <10 или >99"
     : ((getSumOfDigits($age) < 10) ? "<br>Сумма цифр $age однозначна" : "<br>Сумма цифр $age двузначна");
 $arr12 = array();
 echo "<br>";
@@ -303,4 +303,12 @@ for ($i = 0; $i < rand(2, 5); $i++) {
 echo (count($arr12) == 3) ? "<br>SUM " . array_sum($arr12) : "<br>!=3";
 
 
+// task 19
+echo "<br><br>#19<br>";
 
+$xString = "";
+
+for ($i = 0; $i < 20; $i++) {
+    echo "$xString<br>";
+    $xString .= "x";
+}
