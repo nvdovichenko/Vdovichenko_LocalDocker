@@ -2,7 +2,6 @@
 
 // 1 task
 echo "#1";
-/* Imagine a lot of code here */
 $very_bad_unclear_name = " 15 chicken wings";
 $order = &$very_bad_unclear_name;
 $order .= " and a glass of juice";
@@ -21,3 +20,15 @@ $lastMonth = 1187.23;
 $thisMonth = 1089.98;
 echo "<br>Разница расходов = ";
 echo ($lastMonth-$thisMonth)."<br>";
+
+// 11 task
+echo "<br>#11";
+echo "<br>";
+$num_languages = 4;
+$months = 11;
+$days = $months * 16 / 4;
+$daysPerLanguages = $days;
+echo "<br>В среднем на один язык ушло дней: ";
+echo $daysPerLanguages."<br>";
+
+
