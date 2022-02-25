@@ -26,7 +26,7 @@ echo "<br><br>";
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>reg exp and file work</title>
+        <title>лаба 3</title>
     </head>
     <body>
     <form method="POST">
@@ -53,3 +53,30 @@ if ($_POST['getWordsAndSymbols']) {
     }
 }
 echo $_SESSION['textInfo'];
+echo "<br><br>";
+
+
+// task 2(b)
+?>
+
+    <body>
+    <form method="POST">
+        <label>
+            name <input type="text" name="name" required><br>
+            surname <input type="text" name="surname" required><br>
+            age <input type="number" name="age" required><br>
+            <input type="submit" value="Записать в сессию" name="sendToSession">
+        </label>
+    </form>
+    <a href="gettingInfo.php">--> Click here</a>
+    </body>
+
+<?php
+if ($_POST['sendToSession']) {
+    if ($_POST['name'] && $_POST['surname'] && $_POST['age']) {
+        $_SESSION['name'] = $_POST['name'];
+        $_SESSION['surname'] = $_POST['surname'];
+        $_SESSION['age'] = $_POST['age'];
+    }
+}
+?>
