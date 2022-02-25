@@ -59,17 +59,17 @@ echo "<br><br>";
 // task 2(b)
 ?>
 
-    <body>
-    <form method="POST">
-        <label>
-            name <input type="text" name="name" required><br>
-            surname <input type="text" name="surname" required><br>
-            age <input type="number" name="age" required><br>
-            <input type="submit" value="Записать в сессию" name="sendToSession">
-        </label>
-    </form>
-    <a href="gettingInfo.php">--> Click here</a>
-    </body>
+<body>
+<form method="POST">
+    <label>
+        name <input type="text" name="name" required><br>
+        surname <input type="text" name="surname" required><br>
+        age <input type="number" name="age" required><br>
+        <input type="submit" value="Записать в сессию" name="sendToSession">
+    </label>
+</form>
+
+</body>
 
 <?php
 if ($_POST['sendToSession']) {
@@ -77,6 +77,36 @@ if ($_POST['sendToSession']) {
         $_SESSION['name'] = $_POST['name'];
         $_SESSION['surname'] = $_POST['surname'];
         $_SESSION['age'] = $_POST['age'];
+    }
+}
+?>
+
+<body>
+<form method="POST">
+    <label>
+        name <input type="text" name="nameV2" ><br>
+        surname <input type="text" name="surnameV2" required><br>
+        salary <input type="number" name="salaryV2" required><br>
+        status
+        <select name="status" required>
+            <option>SINGLE</option>
+            <option>MARRIED</option>
+            <option>DIVORCED</option>
+            <option>WIDOW(ER)</option>
+        </select><br>
+        <input type="submit" value="Записать в сессию" name="sendToSessionArray"><br>
+    </label>
+    <a href="/gettingInfo.php">--> click here</a>
+</form>
+</body>
+<?php
+if ($_POST['sendToSessionArray']) {
+    if ($_POST['nameV2'] && $_POST['surnameV2'] && $_POST['salaryV2'] && $_POST['status']) {
+        $_SESSION['userInfo'] = array('name' => $_POST['nameV2'],
+            'surname' => $_POST['surnameV2'],
+            'salary' => $_POST['salaryV2'],
+            'status' => $_POST['status']
+        );
     }
 }
 ?>

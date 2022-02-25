@@ -1,11 +1,11 @@
 <?php
 session_start();
-echo sprintf("CURRENT USER <br><br> name: %s<br>
-surname: %s<br>
-age: %s<br>", $_SESSION['name'], $_SESSION['surname'], $_SESSION['age']);
+echo "Current user:<br>
+NAME: {$_SESSION['name']}<br>
+SURNAME: {$_SESSION['surname']}<br>
+AGE: {$_SESSION['age']}<br>";
 ?>
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,13 @@ age: %s<br>", $_SESSION['name'], $_SESSION['surname'], $_SESSION['age']);
     <title>User info</title>
 </head>
 <body>
-<br><br>
-<a href="one.php"><-- Back</a>
+<ul>
+    <?php
+    foreach ($_SESSION['userInfo'] as $key => $value) {
+        echo "<li>$key : $value</li>";
+    }
+    ?>
+</ul>
+<a href="/one.php"><-- back</a>
 </body>
 </html>
