@@ -1,0 +1,13 @@
+{
+  "name": "Vdovichenko_LocalDocker/code",
+  "authors": [
+    {
+      "name": "Neketka",
+      "email": "nikitavdovichenkom@gmail.com"
+    }
+  ],
+  "require": {
+    "google/apiclient": "2.0",
+    "guzzlehttp/guzzle": "~5.3.1"
+  }
+}
