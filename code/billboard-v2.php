@@ -1,5 +1,17 @@
 <?php
-session_start()
+    require "../vendor/autoload.php";
+    $client = new Google_Client();
+    $client->setApplicationName('Google Sheets API PHP Quickstart');
+    $client->setScopes(Google_Service_Sheets::SPREADSHEETS_READONLY);
+    $client->setAuthConfig('../credentials.json');
+    $client->setAccessType('offline');
+    $client->setPrompt('select_account consent');
+    $service = new Google_Service_Sheets($client);
+    $spreadsheetId = '13ixJlPRuhkFhySTPfW5Suu65t5iHVZYfPrTC0-y42uE';
+    $range = 'AdData!A1:D';
+    $response = $service->spreadsheets_values->get($spreadsheetId, $range);
+    $values = $response->getValues();
+    var_dump($values);
 ?>
 <!doctype html>
 <html lang="en">
@@ -11,7 +23,7 @@ session_start()
     <title>Document</title>
 </head>
 <body>
-<form method="post">
+<form action="/take_inf.php" method="GET">
     <label>
         Your e-mail:<br>
         <input type="email" name="emailNew"
@@ -36,7 +48,7 @@ session_start()
         <input type="submit" name="PostNew" value="POST"> <input type="reset" value="ERASE"><br><br>
     </label>
 </form>
-<form method="post">
+<form action="/take_inf.php" method="GET">
     Choose category to show:
     <label>
         <select name="categorySelect" required>
@@ -50,54 +62,46 @@ session_start()
 </form>
 </body>
 </html>
-<?php
-function DetectCopiesOfHeaders($name, $category): string
-{
-    $copies = 0;
-    foreach (scandir("$category") as $file) {
-        if (preg_match('/^' . $name . '[\(\d\)]*\.txt/', $file)) //REGEX FOR COPIES OF FILES LIKE name.txt name(1).txt name(2).txt
-            $copies++;
-    }
-    if ($copies == 0)
-        return "";
-    return "($copies)";
-}
-
-if ($_POST['start']) {
-    $_SESSION['categoryToShow'] = $_POST['categorySelect'];
-}
-if ($_POST['PostNew']) {
-    $copyPostfix = DetectCopiesOfHeaders($_POST['headingNew'], $_POST['categoryNew']);
-    $newPost = fopen("{$_POST['categoryNew']}/{$_POST['headingNew']}$copyPostfix.txt", 'w');
-    fputs($newPost, "{{$_POST['emailNew']}}\n{{{$_POST['headingNew']}}}\n{$_POST['textNew']}");
-    fclose($newPost);
-}
-?>
+<br>
+    <h1> Ads </h1>
+<br>
+    <?php
+        $categories = scandir(__DIR__."/categories");
+        $ads = [];
+        foreach($categories as $category){
+            if ($category != "." && $category != ".."){
+                $ads[$category] = scandir("categories/$category");
+            }
+        };
+        echo "<table border=1><caption>Ads</caption>";
+        foreach($ads as $category => $arr){
+            echo "<tr><th colspan=3 align=center>" . ucfirst($category) . "</th></tr>";
+            foreach($arr as $ad){
+                if ($ad != "." && $ad != ".."){
+                    $file = fopen("categories/$category/$ad", "r");
+                    $email = fgets($file);
+                    $header = fgets($file);
+                    $adText = fgets($file);
+                    echo "<tr><td>$email</td><td>$header</td><td>$adText</td></tr>";
+                }
+            }
+        }
+        echo "</table>";
+    ?>
 <body>
 <form>
     <label>
-        <table>
+        <h1>Ads from GoogleSheets</h1>
+        <table border=1>
+        <tr><th>Category</th><th>Email</th><th>Header</th><th>Text</th></tr>
             <tbody>
+            
             <?php
-            foreach (scandir("{$_SESSION['categoryToShow']}") as $file) {
-                if (preg_match('/.+\.txt$/', $file)) { //REGEX FOR FILES LIKE text.txt
-                    $post = [];
-                    preg_match('/\{(.+@.+)\}[\n]\{\{(.+)\}\}[\n](.+)/s', //regex for pattern {author} \n {header} \n {text}
-                        file_get_contents("{$_SESSION['categoryToShow']}/$file"),
-                        $post);
-                    echo <<<HEREDOC
-                    <tr>
-                        <th>Автор:$post[1]</th>
-                    </tr>
-                    <tr>
-                        <th>$post[2]</th>
-                    </tr>
-                    <tr>
-                        <td>$post[3]</td>
-                    </tr>
-                    HEREDOC;
-
-                }
+            foreach($values as $adData){
+                echo "<tr>" . "<td>" . ucfirst($adData[0]) . "</td>";
+                echo "<td>" . $adData[1] . "</td>";
+                echo "<td>" . $adData[2] . "</td>";
+                echo "<td>" . $adData[3] . "</td>" . "</tr>";
             }
             ?>
             </tbody>
