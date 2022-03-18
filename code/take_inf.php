@@ -40,5 +40,5 @@ if($_GET["email"] != "" && $_GET["category"] != "Choose category" && $_GET["head
     );
 }
 
-header("Location: BulletinBoard.php");
+header("Location: billboard-v2.php");
 ?>
